@@ -6,3 +6,19 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
+.text-fields {
+  height: 35px;
+  background: #F0F2F6;
+  border-radius: 4px;
+  border: none;
+  padding: 0 10px;
+}
+
+.next-btn {
+  background-color: #5357B1;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 15px 55px;
+}
