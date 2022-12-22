@@ -1,0 +1,46 @@
+#name-field {
+  width: 100%;
+}
+
+.user-identification-form label p {
+  font-weight: 800;
+}
+
+.user-identification-form section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 130px;
+}
+
+.user-identification-form section div {
+  display: flex;
+  width: 100%;
+  padding: 12.5px 0;
+}
+
+.user-identification-form section div label {
+  width: 50%;
+}
+
+.user-identification-form section div label:nth-child(1) {
+  padding: 0 30px 0 0;
+}
+
+.user-identification-form section div label:nth-child(2) {
+  padding: 0 0 0 30px;
+}
+
+.user-identification-form section div label p {
+  font-weight: 800;
+}
+
+.user-identification-form section div label input {
+  width: 100%;
+}
+
+.next-btn-user-identification {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 25px;
+}
