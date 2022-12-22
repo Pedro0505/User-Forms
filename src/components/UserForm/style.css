@@ -1,0 +1,40 @@
+.user-form-main {
+  width: 60vw;
+  max-width: 60vw;
+  min-width: fit-content;
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  border: 2px solid #F0F2F6;
+  box-shadow: 0px 4px 31px #EEF1F5;
+  border-radius: 8px;
+  padding: 55px 83px 25px 83px;
+  position: relative;
+}
+
+.icons-group {
+  display: flex;
+  padding: 35px 0;
+}
+
+.icons-group span {
+  display: flex;
+  margin: 0 45px 0 0;
+  align-items: center;
+}
+
+.icons-group span div {
+  background-color: #F0F2F6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  height: 50px;
+  width: 50px;
+  margin-right: 20px;
+}
+
+.icons-group span p {
+  font-size: 16px;
+  font-weight: 800;
+}
