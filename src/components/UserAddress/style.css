@@ -1,0 +1,84 @@
+#reference-field {
+  width: 100%;
+}
+
+.user-address-form label > p {
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.cep-street-field {
+  display: flex;
+  margin: 0 0 30px 0;
+}
+
+.cep-street-field label {
+  width: 50%;
+}
+
+.cep-street-field label input {
+  width: 100%;
+}
+
+.cep-street-field label:nth-child(1) {
+  padding: 0 30px 0 0;
+}
+
+.cep-street-field label:nth-child(2) {
+  padding: 0 0 0 30px;
+}
+
+.house-number-district-field {
+  display: flex;
+  width: 50%;
+}
+
+.house-number-district-field label,
+.house-number-district-field label input {
+  width: 100%;
+}
+
+.house-number-district-field label:nth-child(1) {
+  padding: 0 5px 0 0;
+}
+
+.house-number-district-field label:nth-child(2) {
+  padding: 0 0 0 5px;
+}
+
+.house-number-district-city-field {
+  display: flex;
+  margin: 30px 0;
+}
+
+.house-number-district-city-field div:nth-child(1) {
+  padding: 0 30px 0 0;
+}
+
+.house-number-district-city-field div:nth-child(2) {
+  padding: 0 0 0 30px;
+}
+
+.city-container {
+  width: 50%;
+}
+
+.city-container label input {
+  width: 100%;
+}
+
+.reference-field-container {
+  margin: 30px 0;
+  margin-bottom: 150px;
+}
+
+.next-previous-btn-address-container {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 25px;
+}
+
+.previous-btn-address {
+  margin-right: 25px;
+}
