@@ -26,6 +26,15 @@
   ],
   "rules": {
     "no-console": "off",
-    "indent": ["error", 2]
+    "indent": ["error", 2],
+    "max-len": ["error", { "code": 100 }],
+    "react/jsx-max-props-per-line": [
+      "error",
+      {
+        "maximum": 1,
+        "when": "multiline"
+      }
+    ],
+    "object-curly-newline": [0, { "multiline": true, "minProperties": 4 }]
   }
 }
