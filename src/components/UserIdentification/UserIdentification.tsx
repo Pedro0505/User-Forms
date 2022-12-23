@@ -4,10 +4,12 @@ import './style.css';
 function UserIdentification() {
   return (
     <form className="user-identification-form">
-      <label htmlFor="name-field">
-        <p>Nome</p>
-        <input className="text-fields" type="text" name="name" id="name-field" />
-      </label>
+      <div className="name-field-conatiner">
+        <label htmlFor="name-field">
+          <p>Nome</p>
+          <input className="text-fields" type="text" name="name" id="name-field" />
+        </label>
+      </div>
       <section>
         <div>
           <label htmlFor="password-field">

@@ -1,6 +1,6 @@
 import React from 'react';
 import { RiFileTextFill, RiHome4Fill, RiUser5Fill } from 'react-icons/ri';
-import UserIdentification from '../UserIdentification/UserIdentification';
+import UserAddress from '../UserAddress/UserAddress';
 import './style.css';
 
 function UserForm() {
@@ -27,7 +27,7 @@ function UserForm() {
           <p>Sobre Você</p>
         </span>
       </div>
-      <UserIdentification />
+      <UserAddress />
     </main>
   );
 }

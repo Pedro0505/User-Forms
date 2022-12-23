@@ -2,14 +2,19 @@
   width: 100%;
 }
 
-.user-identification-form label p {
+.name-field-conatiner {
+  padding: 0 0 12.5px 0;
+}
+
+.user-identification-form label > p {
   font-weight: 800;
+  margin-bottom: 5px;
 }
 
 .user-identification-form section {
   display: flex;
   flex-direction: column;
-  margin-bottom: 130px;
+  margin-bottom: 140px;
 }
 
 .user-identification-form section div {
@@ -28,10 +33,6 @@
 
 .user-identification-form section div label:nth-child(2) {
   padding: 0 0 0 30px;
-}
-
-.user-identification-form section div label p {
-  font-weight: 800;
 }
 
 .user-identification-form section div label input {
