@@ -41,3 +41,13 @@
   padding: 15px 55px;
   cursor: pointer;
 }
+
+@media screen and (max-width: 840px) {
+  .next-btn {
+    width: 220px;
+  }
+  
+  .previous-btn {
+    width: 220px;
+  }
+}

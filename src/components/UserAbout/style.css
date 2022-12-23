@@ -28,3 +28,25 @@
   margin-right: 25px;
 }
 
+@media screen and (max-width: 520px) {
+  .next-previous-btn-about-container {
+    position: static;
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+  }
+
+  .previous-btn-about {
+    margin-right: 0;
+  }
+
+  .previous-btn-about,
+  .previous-btn-about {
+    margin-bottom: 10px;
+  }
+
+  .about-text-area-container {
+    margin-bottom: 80px;
+}
+}

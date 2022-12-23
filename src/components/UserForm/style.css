@@ -43,4 +43,25 @@
   .icons-group span p {
     display: none;
   }
+
+  .icons-group {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .user-form-main {
+    padding: 15px 30px 15px 30px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .user-form-main {
+    padding: 5px;
+  }
+
+  .icons-group span {
+    margin: 0 25px 0 0;
+  }
 }
