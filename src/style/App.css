@@ -19,6 +19,20 @@
   background-color: #5357B1;
   color: white;
   border: none;
+  min-width: 200px;
+  max-width: 250px;
   border-radius: 4px;
   padding: 15px 55px;
+  cursor: pointer;
+}
+
+.previous-btn {
+  background-color: #8C98A9;;
+  color: white;
+  border: none;
+  min-width: 200px;
+  max-width: 250px;
+  border-radius: 4px;
+  padding: 15px 55px;
+  cursor: pointer;
 }
