@@ -42,6 +42,15 @@
   cursor: pointer;
 }
 
+.input-error {
+  outline: 1.5px solid rgb(230, 77, 77);
+}
+
+.error-messages {
+  font-size: 13px;
+  color: rgb(230, 77, 77);
+}
+
 @media screen and (max-width: 840px) {
   .next-btn {
     width: 220px;
