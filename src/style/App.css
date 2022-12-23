@@ -7,6 +7,11 @@
   font-family: 'Poppins', sans-serif;
 }
 
+#root {
+  width: 50vw;
+  background-color: #F8FAFB;
+}
+
 .text-fields {
   height: 35px;
   background: #F0F2F6;
