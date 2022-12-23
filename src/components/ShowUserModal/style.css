@@ -1,0 +1,59 @@
+.show-user-modal-container {
+  background-color: #FFFFFF;
+  border: 2px solid #F0F2F6;
+  box-shadow: 0px 4px 31px #EEF1F5;
+  border-radius: 8px;
+  padding: 50px 60px;
+  width: 25vw;
+  min-width: fit-content;
+}
+
+.user-info-fields {
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 36px;
+}
+
+.field-description {
+  color: #8C98A9;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 24px;
+}
+
+.show-user-modal-container h1 {
+  text-align: center;
+  font-weight: 800;
+  margin-bottom: 30px;
+}
+
+.street-cep-house-number-container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+.show-user-email {
+  border-bottom: 1px solid #F0F2F6;
+  padding-bottom: 20px;
+  margin-top: 20px;
+}
+
+.show-user-cep {
+  margin-top: 20px;
+}
+
+.show-user-house-number {
+  margin-left: 20px;
+}
+
+.btn-new-user {
+  background-color: #5357B1;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 15px 55px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 120px;
+}
