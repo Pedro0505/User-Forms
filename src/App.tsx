@@ -1,11 +1,11 @@
 import React from 'react';
-import ShowUser from './pages/ShowUser/ShowUser';
+import CreateUser from './pages/CreateUser/CreateUser';
 import './style/App.css';
 
 function App() {
   return (
     <div>
-      <ShowUser />
+      <CreateUser />
     </div>
   );
 }

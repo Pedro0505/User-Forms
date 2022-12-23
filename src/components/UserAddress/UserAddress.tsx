@@ -18,7 +18,12 @@ function UserAddress() {
         <div className="house-number-district-field">
           <label htmlFor="house-number-field">
             <p>Número</p>
-            <input className="text-fields" type="text" name="house-number" id="house-number-field" />
+            <input
+              className="text-fields"
+              type="text"
+              name="house-number"
+              id="house-number-field"
+            />
           </label>
           <label htmlFor="district-field">
             <p>Bairro</p>
