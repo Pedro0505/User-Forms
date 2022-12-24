@@ -7,7 +7,7 @@ import UserIdentification from '../UserIdentification/UserIdentification';
 import './style.css';
 
 function UserForm() {
-  const { section } = useContext(UserContext);
+  const { section, iconsNav } = useContext(UserContext);
 
   return (
     <main className="user-form-main">
@@ -15,19 +15,19 @@ function UserForm() {
       <div className="icons-group">
         <span>
           <div>
-            <RiUser5Fill fontSize="25px" />
+            <RiUser5Fill fontSize="25px" className={ iconsNav.userInfo } />
           </div>
           <p>Identificação do Usuário</p>
         </span>
         <span>
           <div>
-            <RiHome4Fill fontSize="25px" />
+            <RiHome4Fill fontSize="25px" className={ iconsNav.userAddress } />
           </div>
           <p>Endereço do Usuário</p>
         </span>
         <span>
           <div>
-            <RiFileTextFill fontSize="25px" />
+            <RiFileTextFill fontSize="25px" className={ iconsNav.userAbout } />
           </div>
           <p>Sobre Você</p>
         </span>

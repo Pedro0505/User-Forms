@@ -10,7 +10,7 @@ function UserAbout() {
     about: '',
   };
 
-  const { handleSection, storeUserAbout, userAbout } = useContext(UserContext);
+  const { handleSection, storeUserAbout, handleIconsStatus, userAbout } = useContext(UserContext);
   const navigate = useNavigate();
   const [formValue, setFormValue] = useState<IUserAboutForm>(intitialFormValue);
   const [formErrors, setFormErrors] = useState<IUserAboutForm>(intitialFormValue);
@@ -43,12 +43,14 @@ function UserAbout() {
   const handlePrevius = () => {
     const isValid = validateForm(formValue);
     if (isValid) {
+      handleIconsStatus('userAbout', 'completed');
       storeUserAbout(formValue);
       handleSection('address');
     }
   };
 
   useEffect(() => {
+    handleIconsStatus('userAbout', 'in-use');
     setFormValue(userAbout);
   }, []);
 

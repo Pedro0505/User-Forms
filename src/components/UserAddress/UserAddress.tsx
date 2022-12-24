@@ -10,7 +10,7 @@ function UserAddress() {
     cep: '', street: '', houseNumber: '', district: '', city: '', reference: '',
   };
   const {
-    handleSection, userAddress: userAddressContext, storeUserAddress,
+    handleSection, userAddress: userAddressContext, storeUserAddress, handleIconsStatus,
   } = useContext(UserContext);
   const [formValue, setFormValue] = useState<IUserAddressForm>(intitialFormValue);
   const [formErrors, setFormErrors] = useState<IUserAddressForm>(intitialFormValue);
@@ -73,6 +73,7 @@ function UserAddress() {
     const isValidCep = await validateCep(formValue.cep);
 
     if (isValidCep && isValid) {
+      handleIconsStatus('userAddress', 'completed');
       storeUserAddress(formValue);
       handleSection('about');
     }
@@ -84,12 +85,14 @@ function UserAddress() {
 
     validateCep(formValue.cep);
     if (isValid && isValidCep) {
+      handleIconsStatus('userAddress', 'completed');
       storeUserAddress(formValue);
       handleSection('info');
     }
   };
 
   useEffect(() => {
+    handleIconsStatus('userAddress', 'in-use');
     setFormValue(userAddressContext);
   }, []);
 

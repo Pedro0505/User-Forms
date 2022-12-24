@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import IIconsStatus from './interfaces/IIconsStatus';
 import ISectionTypes from './interfaces/ISectionTypes';
 import IUserAbout from './interfaces/IUserAbout';
 import IUserAddress from './interfaces/IUserAddress';
@@ -25,11 +26,17 @@ const initialValue: IUserContextType = {
   userAbout: {
     about: '',
   },
+  iconsNav: {
+    userInfo: 'in-use',
+    userAddress: 'to-complete',
+    userAbout: 'to-complete',
+  },
   section: 'info',
   handleSection: () => {},
   storeUserInfo: () => {},
   storeUserAddress: () => {},
   storeUserAbout: () => {},
+  handleIconsStatus: () => {},
   resetUserInfos: () => {},
 };
 
@@ -39,6 +46,7 @@ export const UserProvider = ({ children }: IUserContextProps) => {
   const [userInfo, setUserInfo] = useState<IUserInfo>(initialValue.userInfo);
   const [userAddress, setUserAddress] = useState<IUserAddress>(initialValue.userAddress);
   const [userAbout, setUserAbout] = useState<IUserAbout>(initialValue.userAbout);
+  const [iconsNavStatus, setIconsNavStatus] = useState(initialValue.iconsNav);
   const [section, setSection] = useState<ISectionTypes>('info');
 
   const storeUserInfo = (info: IUserInfo) => {
@@ -57,10 +65,16 @@ export const UserProvider = ({ children }: IUserContextProps) => {
     setSection(sections);
   };
 
+  const handleIconsStatus = (field: keyof typeof initialValue.iconsNav, value: IIconsStatus) => {
+    setIconsNavStatus((prevState) => ({ ...prevState, [field]: value }));
+  };
+
   const resetUserInfos = () => {
     setUserInfo(initialValue.userInfo);
     setUserAbout(initialValue.userAbout);
     setUserAddress(initialValue.userAddress);
+    setIconsNavStatus(initialValue.iconsNav);
+    setSection('info');
   };
 
   const context = {
@@ -68,11 +82,13 @@ export const UserProvider = ({ children }: IUserContextProps) => {
     userAddress,
     section,
     userAbout,
+    iconsNav: iconsNavStatus,
     storeUserInfo,
     storeUserAddress,
     storeUserAbout,
     handleSection,
     resetUserInfos,
+    handleIconsStatus,
   };
 
   return (

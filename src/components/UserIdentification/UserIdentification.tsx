@@ -8,7 +8,7 @@ function UserIdentification() {
   const intitialFormValue: IUserIdentificationForm = {
     name: '', password: '', checkPassword: '', email: '', birthday: '',
   };
-  const { handleSection, userInfo, storeUserInfo } = useContext(UserContext);
+  const { handleSection, userInfo, storeUserInfo, handleIconsStatus } = useContext(UserContext);
   const [formValue, setFormValue] = useState<IUserIdentificationForm>(intitialFormValue);
   const [formErrors, setFormErrors] = useState<IUserIdentificationForm>(intitialFormValue);
   const [isSubmit, setIsSubmit] = useState(false);
@@ -49,10 +49,12 @@ function UserIdentification() {
     if (Object.values(formErrors).every((e) => e === '') && isSubmit) {
       handleSection('address');
       storeUserInfo(formValue);
+      handleIconsStatus('userInfo', 'completed');
     }
   }, [formErrors]);
 
   useEffect(() => {
+    handleIconsStatus('userInfo', 'in-use');
     setFormValue(userInfo);
   }, []);
 

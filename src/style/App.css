@@ -57,6 +57,18 @@
   color: rgb(230, 77, 77);
 }
 
+.to-complete { 
+  color: #8C98A9;
+}
+
+.completed {
+  color: #00AE63;
+}
+
+.in-use {
+  color: #5357B1;
+}
+
 @media screen and (max-width: 840px) {
   .next-btn {
     width: 220px;

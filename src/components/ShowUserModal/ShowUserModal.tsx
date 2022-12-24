@@ -4,12 +4,11 @@ import { UserContext } from '../../context/UserContext';
 import './style.css';
 
 function ShowUserModal() {
-  const { userAddress, userInfo, handleSection, resetUserInfos } = useContext(UserContext);
+  const { userAddress, userInfo, resetUserInfos } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleNewUser = () => {
     resetUserInfos();
-    handleSection('info');
     navigate('/');
   };
 
