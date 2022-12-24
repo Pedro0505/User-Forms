@@ -30,6 +30,7 @@ const initialValue: IUserContextType = {
   storeUserInfo: () => {},
   storeUserAddress: () => {},
   storeUserAbout: () => {},
+  resetUserInfos: () => {},
 };
 
 export const UserContext = createContext<IUserContextType>(initialValue);
@@ -56,6 +57,12 @@ export const UserProvider = ({ children }: IUserContextProps) => {
     setSection(sections);
   };
 
+  const resetUserInfos = () => {
+    setUserInfo(initialValue.userInfo);
+    setUserAbout(initialValue.userAbout);
+    setUserAddress(initialValue.userAddress);
+  };
+
   const context = {
     userInfo,
     userAddress,
@@ -65,6 +72,7 @@ export const UserProvider = ({ children }: IUserContextProps) => {
     storeUserAddress,
     storeUserAbout,
     handleSection,
+    resetUserInfos,
   };
 
   return (

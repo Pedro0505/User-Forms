@@ -11,7 +11,8 @@ interface IUserContextType {
   handleSection(section: ISectionTypes): void;
   storeUserInfo(info: IUserInfo): void;
   storeUserAddress(address: IUserAddress): void;
-  storeUserAbout(address: IUserAbout): void;
+  storeUserAbout(about: IUserAbout): void;
+  resetUserInfos(): void;
 }
 
 export default IUserContextType;
