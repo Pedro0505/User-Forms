@@ -6,6 +6,26 @@
   padding: 0 0 12.5px 0;
 }
 
+.password-input-label {
+  position: relative;
+}
+
+.eye-password-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 40px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.eye-check-password-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
 .user-identification-form label > p {
   font-weight: 800;
   margin-bottom: 5px;

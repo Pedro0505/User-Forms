@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { UserContext } from '../../context/UserContext';
 import IUserIdentificationForm from './interfaces/IUserIdentificationForm';
 import userIdentificationSchema from './schema/userIndetificationSchema';
@@ -11,6 +12,7 @@ function UserIdentification() {
   const { handleSection, userInfo, storeUserInfo, handleIconsStatus } = useContext(UserContext);
   const [formValue, setFormValue] = useState<IUserIdentificationForm>(intitialFormValue);
   const [formErrors, setFormErrors] = useState<IUserIdentificationForm>(intitialFormValue);
+  const [showPassword, setShowPassword] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -45,6 +47,14 @@ function UserIdentification() {
     setIsSubmit(true);
   };
 
+  const toggleVisible = () => {
+    if (showPassword) {
+      setShowPassword(false);
+    } else {
+      setShowPassword(true);
+    }
+  };
+
   useEffect(() => {
     if (Object.values(formErrors).every((e) => e === '') && isSubmit) {
       handleSection('address');
@@ -76,19 +86,27 @@ function UserIdentification() {
       </div>
       <section>
         <div>
-          <label htmlFor="password-field">
+          <label htmlFor="password-field" className="password-input-label">
             <p>Senha</p>
             <input
               className={ formErrors.password !== '' ? 'text-fields input-error' : 'text-fields' }
-              type="text"
+              type={ showPassword ? 'text' : 'password' }
               name="password"
               id="password-field"
               onChange={handleChange}
               value={formValue.password}
             />
+            <>
+              {
+                showPassword
+                  ? <AiFillEye className="eye-password-icon" onClick={toggleVisible} /> : (
+                    <AiFillEyeInvisible className="eye-password-icon" onClick={toggleVisible} />
+                  )
+              }
+            </>
             <p className="error-messages">{formErrors.password}</p>
           </label>
-          <label htmlFor="check-password-field">
+          <label htmlFor="check-password-field" className="password-input-label">
             <p>Confirmar Senha</p>
             <input
               className={
@@ -100,6 +118,12 @@ function UserIdentification() {
               onChange={handleChange}
               value={formValue.checkPassword}
             />
+            {
+              showPassword
+                ? <AiFillEye className="eye-check-password-icon" onClick={toggleVisible} /> : (
+                  <AiFillEyeInvisible className="eye-check-password-icon" onClick={toggleVisible} />
+                )
+            }
             <p className="error-messages">{formErrors.checkPassword}</p>
           </label>
         </div>
