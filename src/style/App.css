@@ -18,6 +18,12 @@
   border-radius: 4px;
   border: none;
   padding: 0 10px;
+  outline: 1px solid white;
+}
+
+.text-fields:hover {
+  outline: 1px solid black;
+  transition: all linear 500ms;
 }
 
 .next-btn {
