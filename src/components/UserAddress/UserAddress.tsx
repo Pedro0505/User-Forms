@@ -1,5 +1,6 @@
 import axios from 'axios';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useContext, useState } from 'react';
+import { UserContext } from '../../context/UserContext';
 import IUserAddressForm from './interface/IUserAddressForm';
 import userAddress from './schema/userAddress';
 import './style.css';
@@ -8,8 +9,10 @@ function UserAddress() {
   const intitialFormValue: IUserAddressForm = {
     cep: '', street: '', houseNumber: '', district: '', city: '', reference: '',
   };
+  const { handleSection } = useContext(UserContext);
   const [formValue, setFormValue] = useState<IUserAddressForm>(intitialFormValue);
   const [formErrors, setFormErrors] = useState<IUserAddressForm>(intitialFormValue);
+  const [isValidCep, setIsValidCep] = useState(false);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormValue((prevState) => ({ ...prevState, [event.target.name]: event.target.value }));
@@ -23,6 +26,7 @@ function UserAddress() {
         const response = await axios.get(`https://viacep.com.br/ws/${ceps}/json/`);
 
         if (!response.data.cep) {
+          setIsValidCep(false);
           setFormErrors((prevState) => ({ ...prevState, cep: 'O cep passado é inválido' }));
         } else {
           setFormValue((prevState) => ({
@@ -32,9 +36,11 @@ function UserAddress() {
             city: response.data.localidade,
           }));
 
+          setIsValidCep(true);
           setFormErrors((prevState) => ({ ...prevState, cep: '' }));
         }
       } catch (error) {
+        setIsValidCep(false);
         setFormErrors((prevState) => ({ ...prevState, cep: 'O cep passado é inválido' }));
       }
     }
@@ -53,12 +59,27 @@ function UserAddress() {
     };
 
     setFormErrors(errors);
+    return Object.values(errors).every((e) => e === '');
   };
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    validateForm(formValue);
+    const isValid = validateForm(formValue);
+    validateCep(formValue.cep);
+
+    if (isValidCep && isValid) {
+      handleSection('about');
+    }
+  };
+
+  const handlePrevius = () => {
+    const isValid = validateForm(formValue);
+
+    validateCep(formValue.cep);
+    if (isValid && isValidCep) {
+      handleSection('info');
+    }
   };
 
   return (
@@ -149,7 +170,13 @@ function UserAddress() {
         </label>
       </div>
       <div className="next-previous-btn-address-container">
-        <button className="previous-btn previous-btn-address" type="submit">Anterior</button>
+        <button
+          className="previous-btn previous-btn-address"
+          type="button"
+          onClick={handlePrevius}
+        >
+            Anterior
+        </button>
         <button className="next-btn next-btn-address" type="submit">Próximo passo</button>
       </div>
     </form>

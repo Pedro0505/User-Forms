@@ -1,4 +1,5 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../context/UserContext';
 import IUserIdentificationForm from './interfaces/IUserIdentificationForm';
 import userIdentificationSchema from './schema/userIndetificationSchema';
 import './style.css';
@@ -7,8 +8,10 @@ function UserIdentification() {
   const intitialFormValue: IUserIdentificationForm = {
     name: '', password: '', checkPassword: '', email: '', birthday: '',
   };
+  const { handleSection } = useContext(UserContext);
   const [formValue, setFormValue] = useState<IUserIdentificationForm>(intitialFormValue);
   const [formErrors, setFormErrors] = useState<IUserIdentificationForm>(intitialFormValue);
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormValue((prevState) => ({ ...prevState, [event.target.name]: event.target.value }));
@@ -39,7 +42,14 @@ function UserIdentification() {
     event.preventDefault();
 
     validateForm(formValue);
+    setIsSubmit(true);
   };
+
+  useEffect(() => {
+    if (Object.values(formErrors).every((e) => e === '') && isSubmit) {
+      handleSection('address');
+    }
+  }, [formErrors]);
 
   return (
     <form className="user-identification-form" onSubmit={handleSubmit}>
