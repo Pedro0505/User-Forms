@@ -1,17 +1,93 @@
-import React from 'react';
+import axios from 'axios';
+import React, { ChangeEvent, useState } from 'react';
+import IUserAddressForm from './interface/IUserAddressForm';
+import userAddress from './schema/userAddress';
 import './style.css';
 
 function UserAddress() {
+  const intitialFormValue: IUserAddressForm = {
+    cep: '', street: '', houseNumber: '', district: '', city: '', reference: '',
+  };
+  const [formValue, setFormValue] = useState<IUserAddressForm>(intitialFormValue);
+  const [formErrors, setFormErrors] = useState<IUserAddressForm>(intitialFormValue);
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormValue((prevState) => ({ ...prevState, [event.target.name]: event.target.value }));
+  };
+
+  const validateCep = async (ceps: string) => {
+    const validation = userAddress.cep.validate(ceps).error?.details[0].message || '';
+
+    if (validation === '') {
+      try {
+        const response = await axios.get(`https://viacep.com.br/ws/${ceps}/json/`);
+
+        if (!response.data.cep) {
+          setFormErrors((prevState) => ({ ...prevState, cep: 'O cep passado é inválido' }));
+        } else {
+          setFormValue((prevState) => ({
+            ...prevState,
+            street: response.data.logradouro,
+            district: response.data.bairro,
+            city: response.data.localidade,
+          }));
+
+          setFormErrors((prevState) => ({ ...prevState, cep: '' }));
+        }
+      } catch (error) {
+        setFormErrors((prevState) => ({ ...prevState, cep: 'O cep passado é inválido' }));
+      }
+    }
+  };
+
+  const validateForm = (values: IUserAddressForm) => {
+    const { cep, city, district, houseNumber, reference, street } = userAddress;
+
+    const errors = {
+      cep: cep.validate(values.cep).error?.details[0].message || '',
+      city: city.validate(values.city).error?.details[0].message || '',
+      district: district.validate(values.district).error?.details[0].message || '',
+      houseNumber: houseNumber.validate(values.houseNumber).error?.details[0].message || '',
+      reference: reference.validate(values.reference).error?.details[0].message || '',
+      street: street.validate(values.street).error?.details[0].message || '',
+    };
+
+    setFormErrors(errors);
+  };
+
+  const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    validateForm(formValue);
+  };
+
   return (
-    <form className="user-address-form">
+    <form className="user-address-form" onSubmit={handleSubmit}>
       <div className="cep-street-field">
         <label htmlFor="cep-field">
           <p>CEP</p>
-          <input className="text-fields" type="text" name="cep" id="cep-field" />
+          <input
+            onChange={handleChange}
+            onBlur={() => validateCep(formValue.cep)}
+            className={ formErrors.cep !== '' ? 'text-fields input-error' : 'text-fields' }
+            type="text"
+            name="cep"
+            id="cep-field"
+            value={formValue.cep}
+          />
+          <p className="error-messages">{formErrors.cep}</p>
         </label>
         <label htmlFor="street-field">
           <p>Rua</p>
-          <input className="text-fields" type="text" name="street" id="street-field" />
+          <input
+            onChange={handleChange}
+            className={ formErrors.street !== '' ? 'text-fields input-error' : 'text-fields' }
+            type="text"
+            name="street"
+            id="street-field"
+            value={formValue.street}
+          />
+          <p className="error-messages">{formErrors.street}</p>
         </label>
       </div>
       <section className="house-number-district-city-field">
@@ -19,28 +95,57 @@ function UserAddress() {
           <label htmlFor="house-number-field">
             <p>Número</p>
             <input
-              className="text-fields"
+              onChange={handleChange}
+              className={
+                formErrors.houseNumber !== '' ? 'text-fields input-error' : 'text-fields'
+              }
               type="text"
-              name="house-number"
+              name="houseNumber"
               id="house-number-field"
+              value={formValue.houseNumber}
             />
+            <p className="error-messages">{formErrors.houseNumber}</p>
           </label>
           <label htmlFor="district-field">
             <p>Bairro</p>
-            <input className="text-fields" type="text" name="district" id="district-field" />
+            <input
+              onChange={handleChange}
+              className={ formErrors.district !== '' ? 'text-fields input-error' : 'text-fields' }
+              type="text"
+              name="district"
+              id="district-field"
+              value={formValue.district}
+            />
+            <p className="error-messages">{formErrors.district}</p>
           </label>
         </div>
         <div className="city-container">
           <label htmlFor="city-field">
             <p>Cidade</p>
-            <input className="text-fields" type="text" name="city" id="city-field" />
+            <input
+              onChange={handleChange}
+              className={ formErrors.city !== '' ? 'text-fields input-error' : 'text-fields' }
+              type="text"
+              name="city"
+              id="city-field"
+              value={formValue.city}
+            />
+            <p className="error-messages">{formErrors.city}</p>
           </label>
         </div>
       </section>
       <div className="reference-field-container">
         <label htmlFor="reference-field">
           <p>Ponto de Referência</p>
-          <input className="text-fields" type="text" name="reference" id="reference-field" />
+          <input
+            onChange={handleChange}
+            className={ formErrors.reference !== '' ? 'text-fields input-error' : 'text-fields' }
+            type="text"
+            name="reference"
+            id="reference-field"
+            value={formValue.reference}
+          />
+          <p className="error-messages">{formErrors.reference}</p>
         </label>
       </div>
       <div className="next-previous-btn-address-container">

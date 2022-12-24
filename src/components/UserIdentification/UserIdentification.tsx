@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import IUserIdentificationForm from './interfaces/IUserIdentificationForm';
-import userIdentificationSchema from './schema/userIndetificationSchama';
+import userIdentificationSchema from './schema/userIndetificationSchema';
 import './style.css';
 
 function UserIdentification() {
