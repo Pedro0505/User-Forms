@@ -112,7 +112,7 @@ function UserIdentification() {
               className={
                 formErrors.checkPassword !== '' ? 'text-fields input-error' : 'text-fields'
               }
-              type="text"
+              type={ showPassword ? 'text' : 'password' }
               name="checkPassword"
               id="check-password-field"
               onChange={handleChange}
