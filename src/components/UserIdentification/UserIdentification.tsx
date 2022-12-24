@@ -85,73 +85,84 @@ function UserIdentification() {
         </label>
       </div>
       <section>
-        <div>
-          <label htmlFor="password-field" className="password-input-label">
-            <p>Senha</p>
-            <input
-              className={ formErrors.password !== '' ? 'text-fields input-error' : 'text-fields' }
-              type={ showPassword ? 'text' : 'password' }
-              name="password"
-              id="password-field"
-              onChange={handleChange}
-              value={formValue.password}
-            />
-            <>
+        <div className="passwords-conatiner">
+          <div>
+            <label htmlFor="password-field" className="password-input-label">
+              <p>Senha</p>
+              <input
+                className={ formErrors.password !== '' ? 'text-fields input-error' : 'text-fields' }
+                type={ showPassword ? 'text' : 'password' }
+                name="password"
+                id="password-field"
+                onChange={handleChange}
+                value={formValue.password}
+              />
+              <>
+                {
+                  showPassword
+                    ? <AiFillEye className="eye-password-icon" onClick={toggleVisible} /> : (
+                      <AiFillEyeInvisible className="eye-password-icon" onClick={toggleVisible} />
+                    )
+                }
+              </>
+            </label>
+            <p className="error-messages">{formErrors.password}</p>
+          </div>
+          <div>
+            <label htmlFor="check-password-field" className="password-input-label">
+              <p>Confirmar Senha</p>
+              <input
+                className={
+                  formErrors.checkPassword !== '' ? 'text-fields input-error' : 'text-fields'
+                }
+                type={ showPassword ? 'text' : 'password' }
+                name="checkPassword"
+                id="check-password-field"
+                onChange={handleChange}
+                value={formValue.checkPassword}
+              />
               {
                 showPassword
-                  ? <AiFillEye className="eye-password-icon" onClick={toggleVisible} /> : (
-                    <AiFillEyeInvisible className="eye-password-icon" onClick={toggleVisible} />
+                  ? <AiFillEye className="eye-check-password-icon" onClick={toggleVisible} /> : (
+                    <AiFillEyeInvisible
+                      className="eye-check-password-icon"
+                      onClick={toggleVisible}
+                    />
                   )
               }
-            </>
-            <p className="error-messages">{formErrors.password}</p>
-          </label>
-          <label htmlFor="check-password-field" className="password-input-label">
-            <p>Confirmar Senha</p>
-            <input
-              className={
-                formErrors.checkPassword !== '' ? 'text-fields input-error' : 'text-fields'
-              }
-              type={ showPassword ? 'text' : 'password' }
-              name="checkPassword"
-              id="check-password-field"
-              onChange={handleChange}
-              value={formValue.checkPassword}
-            />
-            {
-              showPassword
-                ? <AiFillEye className="eye-check-password-icon" onClick={toggleVisible} /> : (
-                  <AiFillEyeInvisible className="eye-check-password-icon" onClick={toggleVisible} />
-                )
-            }
+            </label>
             <p className="error-messages">{formErrors.checkPassword}</p>
-          </label>
+          </div>
         </div>
-        <div>
-          <label htmlFor="email-field">
-            <p>Email</p>
-            <input
-              className={ formErrors.email !== '' ? 'text-fields input-error' : 'text-fields' }
-              type="text"
-              name="email"
-              id="email-field"
-              onChange={handleChange}
-              value={formValue.email}
-            />
-            <p className="error-messages">{formErrors.email}</p>
-          </label>
-          <label htmlFor="birthday-field">
-            <p>Data de nascimento</p>
-            <input
-              className={ formErrors.birthday !== '' ? 'text-fields input-error' : 'text-fields' }
-              type="text"
-              name="birthday"
-              id="birthday-field"
-              onChange={handleChange}
-              value={formValue.birthday}
-            />
-            <p className="error-messages">{formErrors.birthday}</p>
-          </label>
+        <div className="email-birthday-container">
+          <div>
+            <label htmlFor="email-field">
+              <p>Email</p>
+              <input
+                className={ formErrors.email !== '' ? 'text-fields input-error' : 'text-fields' }
+                type="text"
+                name="email"
+                id="email-field"
+                onChange={handleChange}
+                value={formValue.email}
+              />
+              <p className="error-messages">{formErrors.email}</p>
+            </label>
+          </div>
+          <div>
+            <label htmlFor="birthday-field">
+              <p>Data de nascimento</p>
+              <input
+                className={ formErrors.birthday !== '' ? 'text-fields input-error' : 'text-fields' }
+                type="text"
+                name="birthday"
+                id="birthday-field"
+                onChange={handleChange}
+                value={formValue.birthday}
+              />
+              <p className="error-messages">{formErrors.birthday}</p>
+            </label>
+          </div>
         </div>
       </section>
       <button className="next-btn next-btn-user-identification" type="submit">Próximo passo</button>
