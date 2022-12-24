@@ -1,7 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './style.css';
 
 function ShowUserModal() {
+  const navigate = useNavigate();
+
+  const handleNewUser = () => {
+    navigate('/');
+  };
+
   return (
     <section className="show-user-modal-container">
       <h1>Usuário criado!</h1>
@@ -31,7 +38,7 @@ function ShowUserModal() {
           <p className="user-info-fields">121</p>
         </div>
       </section>
-      <button type="button" className="btn-new-user">Novo usuário</button>
+      <button type="button" className="btn-new-user" onClick={handleNewUser}>Novo usuário</button>
     </section>
   );
 }
