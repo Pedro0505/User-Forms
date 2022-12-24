@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useContext, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 import IUserAboutForm from './interfaces/IUserAboutForm';
@@ -10,7 +10,7 @@ function UserAbout() {
     about: '',
   };
 
-  const { handleSection } = useContext(UserContext);
+  const { handleSection, storeUserAbout, userAbout } = useContext(UserContext);
   const navigate = useNavigate();
   const [formValue, setFormValue] = useState<IUserAboutForm>(intitialFormValue);
   const [formErrors, setFormErrors] = useState<IUserAboutForm>(intitialFormValue);
@@ -43,9 +43,14 @@ function UserAbout() {
   const handlePrevius = () => {
     const isValid = validateForm(formValue);
     if (isValid) {
+      storeUserAbout(formValue);
       handleSection('address');
     }
   };
+
+  useEffect(() => {
+    setFormValue(userAbout);
+  }, []);
 
   return (
     <form className="user-about-form" onSubmit={handleSubmit}>

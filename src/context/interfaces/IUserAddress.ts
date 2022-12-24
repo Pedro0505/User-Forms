@@ -1,7 +1,10 @@
 interface IUserAddress {
-  street: string,
-  houseNumber: string,
-  cep: string,
+  cep: string;
+  street: string;
+  houseNumber: string;
+  district: string;
+  city: string;
+  reference: string;
 }
 
 export default IUserAddress;

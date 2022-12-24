@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { ChangeEvent, useContext, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../context/UserContext';
 import IUserAddressForm from './interface/IUserAddressForm';
 import userAddress from './schema/userAddress';
@@ -9,16 +9,18 @@ function UserAddress() {
   const intitialFormValue: IUserAddressForm = {
     cep: '', street: '', houseNumber: '', district: '', city: '', reference: '',
   };
-  const { handleSection } = useContext(UserContext);
+  const {
+    handleSection, userAddress: userAddressContext, storeUserAddress,
+  } = useContext(UserContext);
   const [formValue, setFormValue] = useState<IUserAddressForm>(intitialFormValue);
   const [formErrors, setFormErrors] = useState<IUserAddressForm>(intitialFormValue);
-  const [isValidCep, setIsValidCep] = useState(false);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormValue((prevState) => ({ ...prevState, [event.target.name]: event.target.value }));
   };
 
   const validateCep = async (ceps: string) => {
+    let isValid = false;
     const validation = userAddress.cep.validate(ceps).error?.details[0].message || '';
 
     if (validation === '') {
@@ -26,7 +28,7 @@ function UserAddress() {
         const response = await axios.get(`https://viacep.com.br/ws/${ceps}/json/`);
 
         if (!response.data.cep) {
-          setIsValidCep(false);
+          isValid = false;
           setFormErrors((prevState) => ({ ...prevState, cep: 'O cep passado é inválido' }));
         } else {
           setFormValue((prevState) => ({
@@ -36,14 +38,16 @@ function UserAddress() {
             city: response.data.localidade,
           }));
 
-          setIsValidCep(true);
+          isValid = true;
           setFormErrors((prevState) => ({ ...prevState, cep: '' }));
         }
       } catch (error) {
-        setIsValidCep(false);
+        isValid = false;
         setFormErrors((prevState) => ({ ...prevState, cep: 'O cep passado é inválido' }));
       }
     }
+
+    return isValid;
   };
 
   const validateForm = (values: IUserAddressForm) => {
@@ -62,25 +66,32 @@ function UserAddress() {
     return Object.values(errors).every((e) => e === '');
   };
 
-  const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const isValid = validateForm(formValue);
-    validateCep(formValue.cep);
+    const isValidCep = await validateCep(formValue.cep);
 
     if (isValidCep && isValid) {
+      storeUserAddress(formValue);
       handleSection('about');
     }
   };
 
-  const handlePrevius = () => {
+  const handlePrevius = async () => {
     const isValid = validateForm(formValue);
+    const isValidCep = await validateCep(formValue.cep);
 
     validateCep(formValue.cep);
     if (isValid && isValidCep) {
+      storeUserAddress(formValue);
       handleSection('info');
     }
   };
+
+  useEffect(() => {
+    setFormValue(userAddressContext);
+  }, []);
 
   return (
     <form className="user-address-form" onSubmit={handleSubmit}>
