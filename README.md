@@ -33,6 +33,7 @@ Inicie o servidor
 # Stacks 📚
 
 - React
+- Typescript
 - Context Api
 - Joi
 - React Router Dom
